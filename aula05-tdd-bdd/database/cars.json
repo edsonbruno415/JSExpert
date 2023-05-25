@@ -1,1 +1,23 @@
-[{"id":"b53a3630-a231-4574-aba7-848fdce79959","name":"Jetta","releaseYear":2022,"available":true,"gasAvailable":true},{"id":"c0149c64-c470-42ca-bafe-d3df6d9f5f47","name":"Colorado","releaseYear":2023,"available":true,"gasAvailable":true},{"id":"08d3ddcb-43a9-4f3f-a2ab-ee3e698e6100","name":"CX-9","releaseYear":2022,"available":true,"gasAvailable":true}]
+[
+  {
+    "id": "b53a3630-a231-4574-aba7-848fdce79959",
+    "name": "Jetta",
+    "releaseYear": 2022,
+    "available": true,
+    "gasAvailable": true
+  },
+  {
+    "id": "c0149c64-c470-42ca-bafe-d3df6d9f5f47",
+    "name": "Colorado",
+    "releaseYear": 2023,
+    "available": true,
+    "gasAvailable": true
+  },
+  {
+    "id": "08d3ddcb-43a9-4f3f-a2ab-ee3e698e6100",
+    "name": "CX-9",
+    "releaseYear": 2022,
+    "available": true,
+    "gasAvailable": true
+  }
+]
