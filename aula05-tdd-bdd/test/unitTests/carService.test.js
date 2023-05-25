@@ -1,5 +1,6 @@
 const { describe, it, before, beforeEach, afterEach } = require('mocha');
 const CarService = require('../../src/services/carService');
+const Transaction = require('./../../src/entities/transaction');
 
 const { join } = require('path');
 const { expect } = require('chai');
@@ -69,9 +70,77 @@ describe('CarService Suite Tests', () => {
 
     const result = await carService.getAvailableCar(carCategory);
     const expected = car;
-    
+
     expect(carService.chooseRandomCar.calledOnce).to.be.ok;
     expect(carService.carRepository.find.calledWithExactly(car.id)).to.be.ok;
+    expect(result).to.be.deep.equal(expected);
+  });
+
+  it('given a carCategory, customer and numberOfDays it should calculate final amount in real(R$)', () => {
+    const customer = Object.create(mocks.validCustomer);
+    customer.age = 50;
+
+    const carCategory = Object.create(mocks.validCarCategory);
+    carCategory.price = 37.6;
+
+    const numberOfDays = 5;
+
+    // age: 50 - 1.3 tax - category 37.6
+    // 37.6 * 1.3 = 48,88 * 5 days = 244.40
+
+    // nao depender de dados externos
+
+    sandbox.stub(
+      carService,
+      "taxesBasedOnAge",
+    ).get(() => [{ from: 40, to: 50, then: 1.3 }])
+
+    const expected = carService.currentFormat.format(244.40);
+    const result = carService.calculateFinalPrice(
+      customer,
+      carCategory,
+      numberOfDays,
+    );
+
+    expect(result).to.be.deep.equal(expected);
+  });
+
+  it('given a customer and a car category it should return a transaction receipt', async () => {
+    const car = mocks.validCar;
+    const carCategory = {
+      ...mocks.validCarCategory,
+      price: 37.6,
+      carIds: [car.id]
+    };
+
+    const customer = Object.create(mocks.validCustomer);
+    customer.age = 20;
+    const numberOfDays = 5;
+    const dueDate = "10 de novembro de 2020";
+
+    const now = new Date(2020, 10, 5);
+    sandbox.useFakeTimers(now.getTime());
+
+    sandbox.stub(
+      carService.carRepository,
+      carService.carRepository.find.name,
+    ).resolves(car);
+
+    // age: 20, tax: 1.1, categoryPrice: 37.6
+    // 37.6 * 1.1 = 41.36 * 5 days = 206.8
+    const expectedAmount = carService.currentFormat.format(206.80);
+    const result = await carService.rent(
+      customer,
+      carCategory,
+      numberOfDays,
+    )
+    const expected = new Transaction({
+      customer,
+      car,
+      dueDate,
+      amount: expectedAmount,
+    });
+
     expect(result).to.be.deep.equal(expected);
   });
 });
