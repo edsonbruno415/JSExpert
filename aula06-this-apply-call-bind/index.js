@@ -27,6 +27,15 @@ const file = new File();
 
 //bind retornar função com o this do FILE
 //watch(__filename, file.watch.bind(file));
-
 file.watch.call({ showContent: () => console.log('call: hey sinon') }, null, __filename);
 file.watch.apply({ showContent: () => console.log('call: hey sinon') }, [null, __filename]);
+
+//BIND -> seleciona o 'this' que você quer que chame a função,
+// No exemplo abaixo quem está chamando a função watch da classe File é o Watch do modulo file system,
+// Então o 'this' atual está apontando para o this do Watch module
+// Exemplo: watch(__filename, file.watch)
+// Porém queremos pegar o 'this' do objeto gerado pela classe File por isso utilizamos o 'bind' passando o this que chamará essa função
+// Exemplo: const file = new File();
+// Exemplo: watch(__filename, file.watch.bind(file))
+
+// CALL e APPLY são utilizados para invocar funções
