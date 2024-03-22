@@ -1,12 +1,12 @@
 'use strict';
 
 class UserRespository{
-  constructor({ userDatabase }){
-    this.userDatabase = userDatabase;
+  constructor({ dbConnection }){
+    this.dbConnection = dbConnection;
   }
 
   async findAllUsers(){
-    return await this.userDatabase.findAll();
+    return this.dbConnection.findAll();
   }
 
 }
