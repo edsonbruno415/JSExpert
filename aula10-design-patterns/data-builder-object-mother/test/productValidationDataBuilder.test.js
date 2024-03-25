@@ -1,11 +1,12 @@
 const { expect } = require('chai');
 const { it, describe } = require('mocha');
 const { productValidator } = require('./../src');
-const ProductDataBuilder = require('./model/productDataBuilder');
+// const ProductObjectMother = require('./model/productObjectMother');
+const ProductObjectMother = require('./model/productObjectMother');
 
 describe('Test Data Builder',()=>{
   it('should not return error with valid product',()=>{
-    const product = ProductDataBuilder.instanceProductDataBuilder().build();
+    const product = ProductObjectMother.valid();
     const result = productValidator(product);
 
     const expected = {
@@ -17,7 +18,7 @@ describe('Test Data Builder',()=>{
   });
   describe('Product Validation Rules', ()=>{
     it('should return an object error when creating a Product with invalid id', ()=>{
-      const product = ProductDataBuilder.instanceProductDataBuilder().withInvalidId().build();
+      const product = ProductObjectMother.withInvalidId();
       const result = productValidator(product);
   
       const expected = {
@@ -28,7 +29,7 @@ describe('Test Data Builder',()=>{
       expect(result).to.be.deep.equal(expected);
     });
     it('should return an object error when creating a Product with invalid name', ()=>{
-      const product = ProductDataBuilder.instanceProductDataBuilder().withInvalidName().build();
+      const product = ProductObjectMother.withInvalidName();
       const result = productValidator(product);
   
       const expected = {
@@ -39,7 +40,7 @@ describe('Test Data Builder',()=>{
       expect(result).to.be.deep.equal(expected);
     });
     it('should return an object error when creating a Product with invalid price', ()=>{
-      const product = ProductDataBuilder.instanceProductDataBuilder().withInvalidPrice().build();
+      const product = ProductObjectMother.withInvalidPrice();
       const result = productValidator(product);
   
       const expected = {
@@ -50,7 +51,7 @@ describe('Test Data Builder',()=>{
       expect(result).to.be.deep.equal(expected);
     });
     it('should return an object error when creating a Product with invalid category', ()=>{
-      const product = ProductDataBuilder.instanceProductDataBuilder().withInvalidCategory().build();
+      const product = ProductObjectMother.withInvalidCategory();
       const result = productValidator(product);
   
       const expected = {
