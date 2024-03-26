@@ -1,6 +1,6 @@
 const { expect } = require('chai');
 const { it, describe } = require('mocha');
-const { productValidator } = require('./../src');
+const { productValidator } = require('../src');
 // const ProductObjectMother = require('./model/productObjectMother');
 const ProductObjectMother = require('./model/productObjectMother');
 

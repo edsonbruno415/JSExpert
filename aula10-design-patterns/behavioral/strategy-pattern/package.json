@@ -1,0 +1,22 @@
+{
+  "name": "strategy-pattern",
+  "version": "1.0.0",
+  "description": "Strategy Pattern",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "npx nodemon index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  },
+  "dependencies": {
+    "knex": "^3.1.0",
+    "mongodb": "^3.6.5",
+    "pg": "^8.11.3"
+  }
+}
