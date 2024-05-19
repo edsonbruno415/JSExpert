@@ -1,0 +1,40 @@
+regex101.com
+^\d{3}.\d{3}.\d{3}-\d{2}$
+
+123.123.258-10
+111.183.295-14
+198.189.147-88
+185.200.998-18
+
+[.-] = seleciona todos os pontos e traço, pode realizar replace para eliminar eles, utilizando texto vazio.
+
+12312325810
+11118329514
+19818914788
+18520099818
+
+$ = executa expressão somente em uma linha, evitando processamento desnecessário (boa prática)
+\w+ = uma letra ou mais letras
+\s = espaço
+
+^(\w+),\s(\w+)$ => replace => {firstName: "$2", lastName: "$1"}
+
+Wendel, Erick => {firstName: "Erick", lastName: "Wendel"}
+Gomes, Laila
+Johnson, Jose
+
+\[(.*?)\]\([http|https].*?\) => replace => <a href="$2">$1</a>
+
+[Erick Wendel](https://erickwendel.com) => <a href="https://erickwendel.com">Erick Wendel</a>
+
+? = para a leitura da expressão até o próximo caractere
+
+O [Erick Wendel](https://erickwendel.com) faz palestras e você devia segui-lo lá no [Twitter](http://twitter.com/erickwendel_) ou até no [Instagram](https://instagram.com/erickwendel_)
+
+Ah e pode pesquisar no [Google](https://google.com) ou
+[Yahoo](https://yahoo.com)
+
+vai que vai!
+
+
+
